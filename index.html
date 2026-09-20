@@ -121,6 +121,33 @@
     .service-card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
     .service-card p { color: var(--text-secondary); line-height: 1.7; }
 
+    /* ---------- PROJECTS ---------- */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+    .project-card {
+      background: var(--bg-secondary); border-radius: 1.5rem; padding: 3rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.05); transition: var(--transition-fast);
+      backdrop-filter: blur(10px); display: flex; flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px var(--accent-glow);
+    }
+    .project-icon {
+      display: block; width: 3rem; height: 3rem; margin-bottom: 1.5rem;
+      color: var(--text-primary); transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .project-card:hover .project-icon { color: var(--accent); transform: translateY(-4px); }
+    .project-card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+    .project-card p { color: var(--text-secondary); line-height: 1.7; flex-grow: 1; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;
+      color: var(--accent); font-family: var(--font-heading); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;
+      text-decoration: none; transition: var(--transition-fast);
+    }
+    .project-link:hover { gap: 0.9rem; text-shadow: 0 0 15px var(--accent-glow); }
+
     /* ---------- HOW WE WORK ---------- */
     .timeline { position: relative; padding-left: 3rem; }
     .timeline::before { 
@@ -210,6 +237,7 @@
       <div class="logo"><span translate="no">falc<span>ify</span></span></div>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#how">How we work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -267,6 +295,25 @@
 </svg></div>
             <h3>Custom Software</h3>
             <p>When off-the-shelf can’t keep up. We architect and build tailor-made solutions that fit your workflow like a predator’s claw.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title reveal">Our <span>projects</span></h2>
+        <div class="projects-grid">
+          <div class="project-card reveal">
+            <div class="project-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="18" cy="16" r="3"/>
+            </svg></div>
+            <h3>Muzon</h3>
+            <p>A real-time web app for listening to music together. Shared rooms, synced playback, and a clean dashboard — your friends are always on the same beat.</p>
+            <a href="https://muzon.onrender.com/dashboard" class="project-link" target="_blank" rel="noopener noreferrer">Open project &rarr;</a>
           </div>
         </div>
       </div>
