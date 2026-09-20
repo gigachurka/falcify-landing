@@ -79,9 +79,10 @@
     /* ---------- LANGUAGE SWITCHER ---------- */
     .lang-switcher { position: relative; }
     .lang-btn {
-      display: flex; align-items: center; gap: 0.45rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+      width: 5rem; height: 2.6rem; padding: 0;
       background: transparent; border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 0.5rem; padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
       color: var(--text-secondary); font-family: var(--font-body);
       font-weight: 500; font-size: 0.95rem; cursor: pointer;
       transition: var(--transition-fast);
@@ -112,7 +113,7 @@
     .burger {
       display: none;
       flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-      width: 2.6rem; height: 2.6rem; padding: 0; cursor: pointer;
+      width: 5rem; height: 2.6rem; padding: 0; cursor: pointer;
       background: transparent; border: 1px solid rgba(255,255,255,0.15);
       border-radius: 0.5rem; color: var(--text-secondary);
       transition: var(--transition-fast);
@@ -242,11 +243,12 @@
       .burger { display: flex; }
       .nav-links {
         position: fixed; top: 0; left: 0;
-        width: min(300px, 82vw); height: 100vh; height: 100dvh;
+        width: min(300px, 82vw); height: auto; max-height: 100dvh;
         margin: 0; padding: 6rem 2rem 2rem;
         flex-direction: column; align-items: flex-start; gap: 0.5rem;
         background: var(--bg-secondary);
         border-right: 1px solid rgba(255,255,255,0.08);
+        border-bottom-right-radius: 1.5rem;
         box-shadow: 20px 0 50px rgba(0,0,0,0.5);
         transform: translateX(-105%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
