@@ -74,6 +74,39 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition-fast); }
     .nav-links a:hover { color: var(--accent); }
+    .header-right { display: flex; align-items: center; gap: 2rem; }
+
+    /* ---------- LANGUAGE SWITCHER ---------- */
+    .lang-switcher { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 0.45rem;
+      background: transparent; border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0.5rem; padding: 0.45rem 0.9rem;
+      color: var(--text-secondary); font-family: var(--font-body);
+      font-weight: 500; font-size: 0.95rem; cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .lang-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .lang-btn svg { width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
+    .lang-btn .chevron { width: 0.8rem; height: 0.8rem; transition: transform 0.25s; }
+    .lang-switcher.open .chevron { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; top: calc(100% + 0.5rem); right: 0; min-width: 150px;
+      margin: 0; padding: 0.4rem; list-style: none;
+      background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      opacity: 0; pointer-events: none; transform: translateY(-6px);
+      transition: var(--transition-fast); z-index: 200;
+    }
+    .lang-switcher.open .lang-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .lang-menu button {
+      display: block; width: 100%; text-align: left; padding: 0.6rem 0.9rem;
+      background: none; border: none; border-radius: 0.5rem;
+      color: var(--text-secondary); font-family: var(--font-body);
+      font-size: 0.95rem; cursor: pointer; transition: var(--transition-fast);
+    }
+    .lang-menu button:hover { background: rgba(200,255,0,0.08); color: var(--accent); }
+    .lang-menu button.active { color: var(--accent); font-weight: 600; }
 
     /* ---------- HERO ---------- */
     .hero { 
@@ -182,6 +215,7 @@
       .hero h1 { font-size: 3rem; }
       .hero-subtitle { font-size: 1.2rem; }
       .hero-actions { flex-direction: column; align-items: flex-start; }
+      .header-right { flex-wrap: wrap; justify-content: center; gap: 1rem; }
     }
 
     /* ---------- МОДАЛЬНОЕ ОКНО ---------- */
@@ -235,12 +269,31 @@
   <header class="header">
     <div class="container">
       <div class="logo"><span translate="no">falc<span>ify</span></span></div>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#how">How we work</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="header-right">
+        <ul class="nav-links">
+          <li><a href="#services" data-i18n="nav.services">Services</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#how" data-i18n="nav.how">How we work</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-btn" id="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="lang-current">EN</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang="en" class="active">English</button></li>
+            <li><button type="button" data-lang="ru">Русский</button></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -251,10 +304,10 @@
         <h1>
           <span translate="no" class="highlight" id="typing-text"></span>
         </h1>
-        <p class="hero-subtitle">Sharp software for fast growth. Websites, bots, and custom tools that give your business the falcon’s edge.</p>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Sharp software for fast growth. Websites, bots, and custom tools that give your business the falcon’s edge.</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Start project</a>
-          <a href="#services" class="btn btn-outline">Explore services</a>
+          <a href="#contact" class="btn btn-primary" data-i18n="hero.start">Start project</a>
+          <a href="#services" class="btn btn-outline" data-i18n="hero.explore">Explore services</a>
         </div>
       </div>
     </section>
@@ -262,7 +315,7 @@
     <!-- Services -->
     <section id="services">
       <div class="container">
-        <h2 class="section-title reveal">What we <span>create</span></h2>
+        <h2 class="section-title reveal" data-i18n="services.title">What we <span>create</span></h2>
         <div class="services-grid">
           <div class="service-card reveal">
             <div class="service-icon"><svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -270,15 +323,15 @@
   <line x1="8" y1="21" x2="16" y2="21"/>
   <line x1="12" y1="17" x2="12" y2="21"/>
 </svg></div>
-            <h3>Websites &amp; Web Apps</h3>
-            <p>High-performance, conversion-focused websites that capture your audience and never let go. From corporate platforms to complex dashboards.</p>
+            <h3 data-i18n="services.1.title">Websites &amp; Web Apps</h3>
+            <p data-i18n="services.1.p">High-performance, conversion-focused websites that capture your audience and never let go. From corporate platforms to complex dashboards.</p>
           </div>
           <div class="service-card reveal">
             <div class="service-icon"><svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/>
 </svg></div>
-            <h3>Telegram Bots</h3>
-            <p>Smart automation that works 24/7. Order processing, support, internal tools – we turn Telegram into your business command center.</p>
+            <h3 data-i18n="services.2.title">Telegram Bots</h3>
+            <p data-i18n="services.2.p">Smart automation that works 24/7. Order processing, support, internal tools – we turn Telegram into your business command center.</p>
           </div>
           <div class="service-card reveal">
             <div class="service-icon"><svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -293,8 +346,8 @@
   <line x1="1" y1="9" x2="4" y2="9"/>
   <line x1="1" y1="14" x2="4" y2="14"/>
 </svg></div>
-            <h3>Custom Software</h3>
-            <p>When off-the-shelf can’t keep up. We architect and build tailor-made solutions that fit your workflow like a predator’s claw.</p>
+            <h3 data-i18n="services.3.title">Custom Software</h3>
+            <p data-i18n="services.3.p">When off-the-shelf can’t keep up. We architect and build tailor-made solutions that fit your workflow like a predator’s claw.</p>
           </div>
         </div>
       </div>
@@ -303,7 +356,7 @@
     <!-- Projects -->
     <section id="projects">
       <div class="container">
-        <h2 class="section-title reveal">Our <span>projects</span></h2>
+        <h2 class="section-title reveal" data-i18n="projects.title">Our <span>projects</span></h2>
         <div class="projects-grid">
           <div class="project-card reveal">
             <div class="project-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -311,9 +364,9 @@
               <circle cx="6" cy="18" r="3"/>
               <circle cx="18" cy="16" r="3"/>
             </svg></div>
-            <h3>Muzon</h3>
-            <p>A real-time web app for listening to music together. Shared rooms, synced playback, and a clean dashboard — your friends are always on the same beat.</p>
-            <a href="https://muzon.onrender.com/dashboard" class="project-link" target="_blank" rel="noopener noreferrer">Open project &rarr;</a>
+            <h3>muzon.</h3>
+            <p data-i18n="projects.muzon.p">A real-time web app for listening to music together. Shared rooms, synced playback, and a clean dashboard — your friends are always on the same beat.</p>
+            <a href="https://muzon.onrender.com/dashboard" class="project-link" target="_blank" rel="noopener noreferrer" data-i18n="projects.link">Open project &rarr;</a>
           </div>
         </div>
       </div>
@@ -322,19 +375,19 @@
     <!-- How we work -->
 <section id="how">
   <div class="container">
-    <h2 class="section-title reveal">How we <span>build</span></h2>
+    <h2 class="section-title reveal" data-i18n="how.title">How we <span>build</span></h2>
     <div class="timeline reveal">
       <div class="timeline-item">
-        <h3>1. Discovery & planning</h3>
-        <p>We learn your business inside out: goals, users, and technical constraints — before writing a single line of code.</p>
+        <h3 data-i18n="how.1.title">1. Discovery & planning</h3>
+        <p data-i18n="how.1.p">We learn your business inside out: goals, users, and technical constraints — before writing a single line of code.</p>
       </div>
       <div class="timeline-item">
-        <h3>2. Agile development & QA</h3>
-        <p>Bi-weekly sprints, clean architecture, and aggressive testing ensure your product is fast, secure, and stable from day one.</p>
+        <h3 data-i18n="how.2.title">2. Agile development & QA</h3>
+        <p data-i18n="how.2.p">Bi-weekly sprints, clean architecture, and aggressive testing ensure your product is fast, secure, and stable from day one.</p>
       </div>
       <div class="timeline-item">
-        <h3>3. Launch & continuous improvement</h3>
-        <p>Deployment is just the beginning. We monitor, collect feedback, and relentlessly polish everything we ship.</p>
+        <h3 data-i18n="how.3.title">3. Launch & continuous improvement</h3>
+        <p data-i18n="how.3.p">Deployment is just the beginning. We monitor, collect feedback, and relentlessly polish everything we ship.</p>
       </div>
     </div>
   </div>
@@ -343,12 +396,12 @@
     <!-- CTA -->
     <section id="contact" class="cta-section">
       <div class="container">
-        <h2 class="reveal">Ready to <span>fortify </span> your business?</h2>
+        <h2 class="reveal" data-i18n="cta.title">Ready to <span>fortify </span> your business?</h2>
         <!-- Модальное окно с соцсетями -->
 <div class="modal-overlay" id="contacts-modal">
   <div class="modal-content">
     <button class="modal-close" id="close-modal">&times;</button>
-    <h3 style="text-align:center; margin-bottom: 2rem; font-family: var(--font-heading);">Connect with us</h3>
+    <h3 style="text-align:center; margin-bottom: 2rem; font-family: var(--font-heading);" data-i18n="modal.title">Connect with us</h3>
     <div class="social-links">
       
       <!-- Instagram -->
@@ -399,16 +452,16 @@
     </div>
   </div>
 </div>
-        <p class="reveal" style="color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+        <p class="reveal" style="color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 0 auto;" data-i18n="cta.p">
           Let’s talk about your project. Drop us a message and we’ll get back within 24 hours.
         </p>
-<button id="open-contacts" class="btn btn-primary reveal">Contact us</button>      </div>
+<button id="open-contacts" class="btn btn-primary reveal" data-i18n="cta.btn">Contact us</button>      </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 Falcify. All rights reserved.</p>
+      <p data-i18n="footer">&copy; 2026 Falcify. All rights reserved.</p>
     </div>
   </footer>
 
@@ -425,23 +478,147 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
     revealElements.forEach(el => observer.observe(el));
 
+    // ---------- I18N ----------
+    const translations = {
+      en: {
+        'meta.title': 'Falcify – Sharp software for business',
+        'nav.services': 'Services',
+        'nav.projects': 'Projects',
+        'nav.how': 'How we work',
+        'nav.contact': 'Contact',
+        'hero.typed': 'Falcify your business.',
+        'hero.subtitle': 'Sharp software for fast growth. Websites, bots, and custom tools that give your business the falcon’s edge.',
+        'hero.start': 'Start project',
+        'hero.explore': 'Explore services',
+        'services.title': 'What we <span>create</span>',
+        'services.1.title': 'Websites &amp; Web Apps',
+        'services.1.p': 'High-performance, conversion-focused websites that capture your audience and never let go. From corporate platforms to complex dashboards.',
+        'services.2.title': 'Telegram Bots',
+        'services.2.p': 'Smart automation that works 24/7. Order processing, support, internal tools – we turn Telegram into your business command center.',
+        'services.3.title': 'Custom Software',
+        'services.3.p': 'When off-the-shelf can’t keep up. We architect and build tailor-made solutions that fit your workflow like a predator’s claw.',
+        'projects.title': 'Our <span>projects</span>',
+        'projects.muzon.p': 'A real-time web app for listening to music together. Shared rooms, synced playback, and a clean dashboard — your friends are always on the same beat.',
+        'projects.link': 'Open project &rarr;',
+        'how.title': 'How we <span>build</span>',
+        'how.1.title': '1. Discovery & planning',
+        'how.1.p': 'We learn your business inside out: goals, users, and technical constraints — before writing a single line of code.',
+        'how.2.title': '2. Agile development & QA',
+        'how.2.p': 'Bi-weekly sprints, clean architecture, and aggressive testing ensure your product is fast, secure, and stable from day one.',
+        'how.3.title': '3. Launch & continuous improvement',
+        'how.3.p': 'Deployment is just the beginning. We monitor, collect feedback, and relentlessly polish everything we ship.',
+        'cta.title': 'Ready to <span>fortify </span> your business?',
+        'cta.p': 'Let’s talk about your project. Drop us a message and we’ll get back within 24 hours.',
+        'cta.btn': 'Contact us',
+        'modal.title': 'Connect with us',
+        'footer': '&copy; 2026 Falcify. All rights reserved.'
+      },
+      ru: {
+        'meta.title': 'Falcify – мощный софт для бизнеса',
+        'nav.services': 'Услуги',
+        'nav.projects': 'Проекты',
+        'nav.how': 'Как мы работаем',
+        'nav.contact': 'Контакты',
+        'hero.typed': 'Прокачайте ваш бизнес.',
+        'hero.subtitle': 'Мощный софт для быстрого роста. Сайты, боты и кастомные инструменты, которые дают вашему бизнесу соколиное преимущество.',
+        'hero.start': 'Начать проект',
+        'hero.explore': 'Наши услуги',
+        'services.title': 'Что мы <span>создаём</span>',
+        'services.1.title': 'Сайты и веб-приложения',
+        'services.1.p': 'Быстрые сайты, заточенные под конверсию, которые захватывают аудиторию и не отпускают. От корпоративных платформ до сложных дашбордов.',
+        'services.2.title': 'Telegram-боты',
+        'services.2.p': 'Умная автоматизация, которая работает 24/7. Обработка заказов, поддержка, внутренние инструменты — мы превращаем Telegram в командный центр вашего бизнеса.',
+        'services.3.title': 'Кастомный софт',
+        'services.3.p': 'Когда готовые решения не справляются. Мы проектируем и создаём индивидуальные решения, которые подходят вашему процессу как коготь хищника.',
+        'projects.title': 'Наши <span>проекты</span>',
+        'projects.muzon.p': 'Веб-приложение для совместного прослушивания музыки в реальном времени. Общие комнаты, синхронизированное воспроизведение и удобный дашборд — вы с друзьями всегда на одной волне.',
+        'projects.link': 'Открыть проект &rarr;',
+        'how.title': 'Как мы <span>работаем</span>',
+        'how.1.title': '1. Анализ и планирование',
+        'how.1.p': 'Изучаем ваш бизнес изнутри: цели, пользователей и технические ограничения — до первой строчки кода.',
+        'how.2.title': '2. Разработка и тестирование',
+        'how.2.p': 'Двухнедельные спринты, чистая архитектура и жёсткое тестирование делают продукт быстрым, безопасным и стабильным с первого дня.',
+        'how.3.title': '3. Запуск и развитие',
+        'how.3.p': 'Релиз — только начало. Мы мониторим, собираем обратную связь и безжалостно полируем всё, что выпускаем.',
+        'cta.title': 'Готовы <span>усилить</span> ваш бизнес?',
+        'cta.p': 'Давайте обсудим ваш проект. Напишите нам — ответим в течение 24 часов.',
+        'cta.btn': 'Связаться с нами',
+        'modal.title': 'Свяжитесь с нами',
+        'footer': '&copy; 2026 Falcify. Все права защищены.'
+      }
+    };
+
+    let currentLang = localStorage.getItem('falcify-lang') || 'en';
+    if (!translations[currentLang]) currentLang = 'en';
+
     // ---------- TYPING EFFECT ----------
-    const text = "Falcify your business.";
     const typingElement = document.getElementById('typing-text');
+    let typeTimer = null;
     let i = 0;
+    let pageLoaded = false;
 
     function typeWriter() {
+      const text = translations[currentLang]['hero.typed'];
       if (i < text.length) {
         typingElement.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 80); // скорость печати
-      } else {
-        // убираем курсор после завершения (или оставить)
-        // typingElement.style.borderRight = 'none';
+        typeTimer = setTimeout(typeWriter, 80); // скорость печати
       }
     }
+
+    function startTyping(delay) {
+      clearTimeout(typeTimer);
+      i = 0;
+      typingElement.textContent = '';
+      typeTimer = setTimeout(typeWriter, delay);
+    }
+
     window.addEventListener('load', () => {
-      setTimeout(typeWriter, 400); // небольшая задержка перед стартом
+      pageLoaded = true;
+      startTyping(400); // небольшая задержка перед стартом
+    });
+
+    // ---------- LANGUAGE SWITCH ----------
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+      currentLang = lang;
+      localStorage.setItem('falcify-lang', lang);
+      document.documentElement.lang = lang;
+      document.title = translations[lang]['meta.title'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const val = translations[lang][el.getAttribute('data-i18n')];
+        if (val !== undefined) el.innerHTML = val;
+      });
+      document.getElementById('lang-current').textContent = lang.toUpperCase();
+      document.querySelectorAll('.lang-menu button').forEach(b =>
+        b.classList.toggle('active', b.dataset.lang === lang));
+      if (pageLoaded) startTyping(0);
+    }
+
+    setLanguage(currentLang);
+
+    const langSwitcher = document.getElementById('lang-switcher');
+    const langBtn = document.getElementById('lang-btn');
+
+    langBtn.addEventListener('click', () => {
+      const open = langSwitcher.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open);
+    });
+
+    langSwitcher.querySelectorAll('.lang-menu button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.lang);
+        langSwitcher.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Закрытие меню по клику вне его
+    document.addEventListener('click', (e) => {
+      if (!langSwitcher.contains(e.target)) {
+        langSwitcher.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
     });
   </script>
 
